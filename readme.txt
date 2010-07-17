@@ -3,7 +3,7 @@ Contributors: Jacob M Goldman (C. Murray Consulting)
 Donate link: http://www.cmurrayconsulting.com/software/wordpress-sort-query-by-post-in/
 Tags: post query, query, wp query, developer, orderby, order
 Requires at least: 2.7
-Tested up to: 3.0-beta2
+Tested up to: 3.0
 Stable tag: 1.1
 
 A very simple plug-in that allows post queries to sort the results by the order specified in the "post__in" parameter.
@@ -15,7 +15,7 @@ executing custom post queries. You're welcome to include it in your theme and re
 
 When constructing a WordPress post query in your theme template files or plug-in, WordPress offers the option to explicitly 
 specify the posts to retrieve using the `post__in` parameter. Unfortunately, the `orderby` parameter does not offer an option 
-that will sort the result by the exact order passed in the post__in parameter. This plug-in adds a `post__in` option for the 
+that will sort the result by the exact order passed in the `post__in` parameter. This plug-in adds a `post__in` option for the 
 `orderby` parameter that will order the result by the exact order specified in the `post__in` parameter.
 
 And don't worry about the plug-in being deactivated - your post queries with the new `post__in` value used for `orderby` 
