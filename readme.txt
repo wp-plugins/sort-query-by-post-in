@@ -3,8 +3,8 @@ Contributors: Jacob M Goldman (C. Murray Consulting)
 Donate link: http://www.cmurrayconsulting.com/software/wordpress-sort-query-by-post-in/
 Tags: post query, query, wp query, developer, orderby, order
 Requires at least: 2.7
-Tested up to: 3.0
-Stable tag: 1.1
+Tested up to: 3.0.1
+Stable tag: 1.2
 
 A very simple plug-in that allows post queries to sort the results by the order specified in the "post__in" parameter.
 
@@ -34,3 +34,9 @@ folder to the `/wp-content/plugins/` directory
 `query_posts( array( 'post__in' => array(20,10,106),  'orderby' => 'post__in' ) );`
 
 That will retrieve posts with IDs 20, 10, and 106 in that order!
+
+
+== Changelog ==
+
+= 1.2 =
+* Slightly more careful conditional check for sorting by `post__in`
