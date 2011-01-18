@@ -1,26 +1,20 @@
 === Sort Query by Post In ===
-Contributors: Jacob M Goldman (C. Murray Consulting)
-Donate link: http://www.cmurrayconsulting.com/software/wordpress-sort-query-by-post-in/
+Contributors: jakemgold
+Donate link: http://www.thinkoomph.com/plugins-modules/wordpress-custom-post-type-archives/
 Tags: post query, query, wp query, developer, orderby, order
-Requires at least: 2.7
-Tested up to: 3.0.1
-Stable tag: 1.2
+Requires at least: 3.0
+Tested up to: 3.1
+Stable tag: 1.2.1
 
 A very simple plug-in that allows post queries to sort the results by the order specified in the "post__in" parameter.
 
 == Description ==
 
-Sort Query by Post In is a very light weight (about 4-7 lines of code, version specific!) plug-in intended for developers 
-executing custom post queries. You're welcome to include it in your theme and redistribute - just offer us some credit, please!
+Sort Query by Post In is a very light weight (less than 10 lines of code) plug-in intended for developers executing custom post queries. You're welcome to include it in your theme and redistribute - just offer us some credit, please!
 
-When constructing a WordPress post query in your theme template files or plug-in, WordPress offers the option to explicitly 
-specify the posts to retrieve using the `post__in` parameter. Unfortunately, the `orderby` parameter does not offer an option 
-that will sort the result by the exact order passed in the `post__in` parameter. This plug-in adds a `post__in` option for the 
-`orderby` parameter that will order the result by the exact order specified in the `post__in` parameter.
+When constructing a WordPress post query in your theme template files or plug-in, WordPress offers the option to explicitly specify the posts to retrieve using the `post__in` parameter. Unfortunately, the `orderby` parameter does not offer an option that will sort the result by the exact order passed in the `post__in` parameter. This plug-in adds a `post__in` option for the `orderby` parameter that will order the result by the exact order specified in the `post__in` parameter.
 
-And don't worry about the plug-in being deactivated - your post queries with the new `post__in` value used for `orderby` 
-will simply gracefully fall back to the default date sorting.
-
+And don't worry about the plug-in being deactivated - your post queries with the new `post__in` value used for `orderby` will simply gracefully fall back to the default date sorting.
 
 == Installation ==
 
@@ -35,8 +29,15 @@ folder to the `/wp-content/plugins/` directory
 
 That will retrieve posts with IDs 20, 10, and 106 in that order!
 
-
 == Changelog ==
+
+= 1.2.1 =
+* Dropped support for WordPress pre-3.0 (even lighter!)
 
 = 1.2 =
 * Slightly more careful conditional check for sorting by `post__in`
+
+== Upgrade Notice ==
+
+= 1.2.1 =
+Do not upgrade if you're using a version of WordPress older than 3.0; support for pre-3.0 has been dropped.

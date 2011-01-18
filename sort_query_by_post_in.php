@@ -1,13 +1,13 @@
 <?php
 /**
  Plugin Name: Sort Query by Post In
- Plugin URI: http://www.cmurrayconsulting.com/software/wordpress-sort-query-by-post-in/
+ Plugin URI: http://www.thinkoomph.com/plugins-modules/wordpress-custom-post-type-archives/
  Description: Allows post queries to sort the results by the order specified in the <em>post__in</em> parameter. Just set the <em>orderby</em> parameter to <em>post__in</em>! 
- Version: 1.2
- Author: Jacob M Goldman (C. Murray Consulting)
- Author URI: http://www.cmurrayconsulting.com
+ Version: 1.2.1
+ Author: Jake Goldman (Oomph, Inc)
+ Author URI: http://www.thinkoomph.com
 
-    Plugin: Copyright 2009 C. Murray Consulting  (email : jake@cmurrayconsulting.com)
+    Plugin: Copyright 2011 Oomph, Inc  (email : jake@thinkoomph.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,33 +24,12 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-if ( !function_exists('sort_query_by_post_in') ) {
-
-if ( get_bloginfo('version') < 3.0 ) : //a little more tricky pre 3.0 since we have to check the query earlier
-
-	add_filter( 'pre_get_posts', 'sort_query_by_post_in' );
+add_filter( 'posts_orderby', 'sort_query_by_post_in', 10, 2 );
 	
-	function sort_query_by_post_in($thequery) {
-		
-		if ( isset($thequery->query['post__in']) && !empty($thequery->query['post__in']) && isset($thequery->query['orderby']) && $thequery->query['orderby'] == 'post__in' ) {
-			$GLOBALS['sort_by_post_in'] = "find_in_set(ID, '" . implode( ',', $thequery->query['post__in'] ) . "')";
-			add_filter('posts_orderby', create_function('$a','return $GLOBALS["sort_by_post_in"];') );
-		}
-		
-		return $thequery;
-	}
-
-else : //simple WordPress 3.0+ version
-
-	add_filter( 'posts_orderby', 'sort_query_by_post_in', 10, 2 );
+function sort_query_by_post_in( $sortby, $thequery ) 
+{
+	if ( isset($thequery->query['post__in']) && !empty($thequery->query['post__in']) && isset($thequery->query['orderby']) && $thequery->query['orderby'] == 'post__in' )
+		$sortby = "find_in_set(ID, '" . implode( ',', $thequery->query['post__in'] ) . "')";
 	
-	function sort_query_by_post_in( $sortby, $thequery ) {
-		if ( isset($thequery->query['post__in']) && !empty($thequery->query['post__in']) && isset($thequery->query['orderby']) && $thequery->query['orderby'] == 'post__in' )
-			$sortby = "find_in_set(ID, '" . implode( ',', $thequery->query['post__in'] ) . "')";
-		return $sortby;
-	}
-
-endif;
-
+	return $sortby;
 }
-?>
