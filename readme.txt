@@ -1,10 +1,10 @@
 === Sort Query by Post In ===
-Contributors: jakemgold
-Donate link: http://www.thinkoomph.com/plugins-modules/wordpress-custom-post-type-archives/
+Contributors: jakemgold, thinkoomph
+Donate link: http://www.get10up.com/plugins/sort-query-by-post-in-wordpress/
 Tags: post query, query, wp query, developer, orderby, order
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 
 A very simple plug-in that allows post queries to sort the results by the order specified in the "post__in" parameter.
 
@@ -30,6 +30,9 @@ folder to the `/wp-content/plugins/` directory
 That will retrieve posts with IDs 20, 10, and 106 in that order!
 
 == Changelog ==
+
+= 1.2.2 =
+* Teeny code simplication, update support information
 
 = 1.2.1 =
 * Dropped support for WordPress pre-3.0 (even lighter!)

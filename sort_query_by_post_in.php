@@ -1,13 +1,13 @@
 <?php
 /**
  Plugin Name: Sort Query by Post In
- Plugin URI: http://www.thinkoomph.com/plugins-modules/wordpress-custom-post-type-archives/
+ Plugin URI: http://www.get10up.com/plugins/sort-query-by-post-in-wordpress/
  Description: Allows post queries to sort the results by the order specified in the <em>post__in</em> parameter. Just set the <em>orderby</em> parameter to <em>post__in</em>! 
- Version: 1.2.1
- Author: Jake Goldman (Oomph, Inc)
- Author URI: http://www.thinkoomph.com
+ Version: 1.2.2
+ Author: Jake Goldman (10up)
+ Author URI: http://www.get10up.com
 
-    Plugin: Copyright 2011 Oomph, Inc  (email : jake@thinkoomph.com)
+    Plugin: Copyright 2011 10up  (email : jake@get10up.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,9 +26,8 @@
 
 add_filter( 'posts_orderby', 'sort_query_by_post_in', 10, 2 );
 	
-function sort_query_by_post_in( $sortby, $thequery ) 
-{
-	if ( isset($thequery->query['post__in']) && !empty($thequery->query['post__in']) && isset($thequery->query['orderby']) && $thequery->query['orderby'] == 'post__in' )
+function sort_query_by_post_in( $sortby, $thequery ) {
+	if ( !empty($thequery->query['post__in']) && isset($thequery->query['orderby']) && $thequery->query['orderby'] == 'post__in' )
 		$sortby = "find_in_set(ID, '" . implode( ',', $thequery->query['post__in'] ) . "')";
 	
 	return $sortby;
