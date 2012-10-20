@@ -1,34 +1,38 @@
 <?php
 /**
  Plugin Name: Sort Query by Post In
- Plugin URI: http://www.get10up.com/plugins/sort-query-by-post-in-wordpress/
+ Plugin URI: http://10up.com/plugins/sort-query-by-post-in-wordpress/
  Description: Allows post queries to sort the results by the order specified in the <em>post__in</em> parameter. Just set the <em>orderby</em> parameter to <em>post__in</em>! 
- Version: 1.2.2
- Author: Jake Goldman (10up)
- Author URI: http://www.get10up.com
-
-    Plugin: Copyright 2011 10up  (email : jake@get10up.com)
-
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ Version: 1.2.3
+ Author: Jake Goldman, 10up, Oomph
+ Author URI: http://10up.com
+ License: GPLv2 or later
 */
 
-add_filter( 'posts_orderby', 'sort_query_by_post_in', 10, 2 );
-	
-function sort_query_by_post_in( $sortby, $thequery ) {
-	if ( !empty($thequery->query['post__in']) && isset($thequery->query['orderby']) && $thequery->query['orderby'] == 'post__in' )
-		$sortby = "find_in_set(ID, '" . implode( ',', $thequery->query['post__in'] ) . "')";
-	
-	return $sortby;
+if ( version_compare( floatval( get_bloginfo( 'version' ) ), '3.5', '>=' ) ) {
+
+	add_action( 'admin_init', 'sort_query_by_post_in_deactivate' );
+	add_action( 'admin_notices', 'sort_query_by_post_in_admin_notice' );
+
+	function sort_query_by_post_in_deactivate() {
+		deactivate_plugins( plugin_basename( __FILE__ ) );
+	}
+
+	function sort_query_by_post_in_admin_notice() {
+		echo '<div class="updated"><p><strong>Sort Query by Post In plug-in</strong> was folded into WordPress core in 3.5; the plug-in has been <strong>deactivated</strong>.</p></div>';
+		if ( isset( $_GET['activate'] ) )
+			unset( $_GET['activate'] );
+	}
+
+} else {
+
+	add_filter( 'posts_orderby', 'sort_query_by_post_in', 10, 2 );
+
+	function sort_query_by_post_in( $sortby, $thequery ) {
+		if ( !empty($thequery->query['post__in']) && isset($thequery->query['orderby']) && $thequery->query['orderby'] == 'post__in' )
+			$sortby = "find_in_set(ID, '" . implode( ',', $thequery->query['post__in'] ) . "')";
+
+		return $sortby;
+	}
+
 }
